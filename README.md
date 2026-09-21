@@ -28,17 +28,18 @@ docker compose up -d
 在青龙「定时任务 → 新建任务」里，命令填：
 
 ```
-ql repo https://github.com/fengdawei-001/fn-scripts.git "jd_" "backUp|config|docker|function|utils|node_modules|\.github" "sendNotify|jdCookie|USER_AGENTS|JS_USER_AGENTS|JDJRValidator|JDSignValidator|ql" "main"
+ql repo https://github.com/fengdawei-001/fn-scripts.git "jd_" "" "function|utils|sendNotify|jdCookie|USER_AGENTS|JS_USER_AGENTS|JDJRValidator|JDSignValidator|ShareCodes|ql" "main"
 ```
 
-> ⚠️ 白名单 `"jd_"` 和黑名单 `"backUp|config|docker|function|utils|..."` 是关键：
-> - 白名单只匹配 `jd_` 开头的脚本，避免把 `function/`、`utils/` 里的库文件也扫成定时任务；
-> - 黑名单把子目录和无关文件排除。
+> ⚠️ 三个参数缺一不可：
+> - **白名单 `"jd_"`**：只把 `jd_` 开头的脚本生成定时任务，避免把库文件扫成任务；
+> - **黑名单 `""`**：留空，不排除任何目录；
+> - **依赖 `"function|utils|sendNotify|..."`**：把 `function/`（含抽离的 `env_*.js` 共享框架）、`utils/` 子目录以及根目录的库文件**同步过去但不生成任务**——这一步最关键，漏了 `function` 会导致脚本 `require('./function/env_xxx.js')` 找不到模块。
 > - 如果仓库是私有的，把地址里的 `github.com` 换成 `用户名:token@github.com` 形式（token 用完记得撤销）。
 
 拉库后青龙会自动：
 1. 把脚本放进 scripts 目录，根据脚本头部 cron 注释自动生成定时任务；
-2. `dependence` 里指定的 `sendNotify`/`jdCookie`/`USER_AGENTS` 等会被同步但**不生成任务**。
+2. `dependence` 里指定的 `function/`、`utils/`、`sendNotify`/`jdCookie`/`USER_AGENTS` 等会被同步但**不生成任务**。
 
 然后：
 1. 面板「依赖管理 → Node.js」安装依赖，或直接在本目录执行 `npm install`。
