@@ -1,0 +1,40 @@
+{
+  "name": "jd-scripts-merged",
+  "version": "1.0.0",
+  "description": "京东自动化脚本合集（jdpro + faker3 合并版）：签到、领京豆、种豆、农场、浇水、抽奖等，自用版已去除互助/助力脚本",
+  "main": "jd_bean_change.js",
+  "scripts": {
+    "test": "echo \"no test\""
+  },
+  "keywords": [
+    "京东",
+    "青龙",
+    "京豆",
+    "签到",
+    "薅羊毛"
+  ],
+  "author": "merged",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "got": "^11.8.6",
+    "request": "^2.88.2",
+    "tough-cookie": "^4.1.3",
+    "ws": "^7.5.10",
+    "jsdom": "^17.0.0",
+    "png-js": "^1.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "download": "^6.2.5",
+    "http-server": "^0.12.3",
+    "tunnel": "0.0.6",
+    "dotenv": "^16.4.5",
+    "https-proxy-agent": "^5.0.1",
+    "iconv-lite": "^0.6.3",
+    "axios": "^1.7.7",
+    "socks-proxy-agent": "^8.0.4",
+    "smallfawn": "^1.0.0"
+  }
+}
