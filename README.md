@@ -9,8 +9,7 @@
 | 合并 | 以 faker3 为基底，并入 jdpro 独有的脚本和库，共 **64 个脚本** |
 | 去除互助 | 删除 6 个纯助力/互助脚本（种豆互助、农场助力、捕鱼助力等），自用不留帮人打工的脚本 |
 | 清理后门 | 清理 12 个文件里混入的 `@redacted/enterprise-plugin` 等 AI 工具注入的遥测代码 |
-| 抽离框架 | 把脚本里重复的 Env 框架抽成 `function/env_*.js` 共享模块（17 个版本），改一处全局生效 |
-| 补充长线脚本 | 从 619 库（Absinthe）补充 6 个长线通用脚本：多合一签到、东东工厂、东东农场、京喜工厂、签到领现金、东东健康社区；并清掉 `jd_cash.js` 的云端作者助力码拉取 |
+| 抽离框架 | 把脚本里重复的 Env 框架抽成 `function/env_*.js` 共享模块（15 个版本），改一处全局生效 |
 | 修复配置 | 重写 package.json（原 main 指向不存在的文件、repository 指向原项目），补齐缺失依赖声明 |
 
 ## 部署到青龙面板
@@ -51,14 +50,13 @@ ql repo https://github.com/fengdawei-001/fn-scripts.git "jd_" "" "function|utils
 - **仅限自用、使用自己账号的 Cookie**。获取/倒卖他人 Cookie 已属刑事犯罪（非法获取计算机信息系统数据罪）。
 - `jd_ksjsb.js` 结构特殊（动态构造、ESM 加载），需要额外依赖 `axios`、`socks-proxy-agent`、`smallfawn`，已在 package.json 声明。
 - 主脚本内部仍可能内置作者助力码（混淆代码无法安全精确删除），运行时会顺带为作者助力，此为上游脚本固有行为。
-- 新增的 6 个长线脚本（来自 619 库）助力码均为环境变量驱动，不填 `FRUITSHARECODES`/`DREAM_FACTORY_SHARE_CODES`/`JD_CASH_SHARECODES` 等环境变量即不会助力；`jd_cash.js` 原本从作者云端拉助力码的逻辑已清空。
 
 ## 目录结构
 
 ```
-├── jd_*.js            # 70 个京东任务脚本
+├── jd_*.js            # 64 个京东任务脚本
 ├── function/
-│   ├── env_*.js       # 抽离出的共用 Env 框架（17 个版本）
+│   ├── env_*.js       # 抽离出的共用 Env 框架（15 个版本）
 │   └── *.js           # 加密/签名/通知等共享库
 ├── utils/             # 工具库
 ├── docker/            # 青龙 Docker 部署文件
